@@ -60,80 +60,86 @@ export const ProductsSection = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {products.map((product) => (
-            <Card key={product.id} className="py-4 hover:cursor-pointer hover:scale-105 transition-all duration-300">
-              <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-                <div className="flex justify-between items-start w-full mb-4">
-                  <div>
-                    <h3 className="text-2xl font-bold">{product.name}</h3>
-                    <p className="text-default-500 text-sm mt-1">{product.description}</p>
+            <Link key={product.id} href={`/product/${product.id}`} className="block">
+              <Card className="py-4 hover:cursor-pointer hover:scale-105 transition-all duration-300">
+                <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
+                  <div className="flex justify-between items-start w-full mb-4">
+                    <div>
+                      <h3 className="text-2xl font-bold">{product.name}</h3>
+                      <p className="text-default-500 text-sm mt-1">{product.description}</p>
+                    </div>
+                    <Chip color="secondary" variant="flat" size="sm">
+                      {product.badge}
+                    </Chip>
                   </div>
-                  <Chip color="secondary" variant="flat" size="sm">
-                    {product.badge}
-                  </Chip>
-                </div>
-              </CardHeader>
-              <CardBody className="overflow-visible py-2">
-                <div className="flex flex-col gap-4">
-                  <div className="relative">
-                    <Image
-                      alt={product.name}
-                      className="object-cover rounded-xl"
-                      src={product.images[product.currentImage - 1]}
-                      onClick={() => window.open(product.link, '_blank')}
-                    />
-                    <div className="flex gap-2 mt-4 justify-center">
-                      {[1, 2, 3].map((num) => (
-                        <button
-                          key={num}
-                          onClick={() => product.setImage(num)}
-                          className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${product.currentImage === num
-                            ? "border-primary"
-                            : "border-transparent hover:border-default-300"
-                            }`}
-                        >
-                          <Image
-                            src={product.images[num - 1]}
-                            alt={`${product.name} view ${num}`}
-                            className="w-full h-full object-cover"
-                          />
-                        </button>
-                      ))}
+                </CardHeader>
+                <CardBody className="overflow-visible py-2">
+                  <div className="flex flex-col gap-4">
+                    <div className="relative">
+                      <Image
+                        alt={product.name}
+                        className="object-cover rounded-xl"
+                        src={product.images[product.currentImage - 1]}
+                      />
+                      <div className="flex gap-2 mt-4 justify-center">
+                        {[1, 2, 3].map((num) => (
+                          <button
+                            key={num}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              product.setImage(num);
+                            }}
+                            className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${product.currentImage === num
+                              ? "border-primary"
+                              : "border-transparent hover:border-default-300"
+                              }`}
+                          >
+                            <Image
+                              src={product.images[num - 1]}
+                              alt={`${product.name} view ${num}`}
+                              className="w-full h-full object-cover"
+                            />
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Divider />
+
+                    <div>
+                      <h4 className="text-lg font-semibold mb-2">Key Features:</h4>
+                      <ul className="space-y-2">
+                        {product.features.map((feature, index) => (
+                          <li key={index} className="flex items-start gap-2">
+                            <span className="text-success text-lg mt-0.5">✓</span>
+                            <span className="text-sm text-default-600">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                   </div>
-
-                  <Divider />
-
-                  <div>
-                    <h4 className="text-lg font-semibold mb-2">Key Features:</h4>
-                    <ul className="space-y-2">
-                      {product.features.map((feature, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <span className="text-success text-lg mt-0.5">✓</span>
-                          <span className="text-sm text-default-600">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                </CardBody>
+                <CardFooter className="flex justify-between items-center px-4">
+                  <div className="flex flex-col">
+                    <span className="text-2xl font-bold text-primary">{product.price}</span>
+                    <span className="text-sm text-default-400 line-through">{product.originalPrice}</span>
                   </div>
-                </div>
-              </CardBody>
-              <CardFooter className="flex justify-between items-center px-4">
-                <div className="flex flex-col">
-                  <span className="text-2xl font-bold text-primary">{product.price}</span>
-                  <span className="text-sm text-default-400 line-through">{product.originalPrice}</span>
-                </div>
-                <Link
-                  className={buttonStyles({
-                    color: "primary",
-                    radius: "full",
-                    variant: "shadow",
-                  })}
-                  href={product.link}
-                  target="_blank"
-                >
-                  Order Now
-                </Link>
-              </CardFooter>
-            </Card>
+                  <button
+                    className={buttonStyles({
+                      color: "primary",
+                      radius: "full",
+                      variant: "shadow",
+                    })}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      window.open(product.link, '_blank');
+                    }}
+                  >
+                    Order Now
+                  </button>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

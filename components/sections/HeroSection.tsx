@@ -9,6 +9,7 @@ export const HeroSection = () => {
     "Enjoy the Simplicity in Your Health",
     "Have Precision",
     "Stay Healthy, Stay Comfortable",
+    "Simplifying Health, One Pill at a Time"
   ];
 
   return (

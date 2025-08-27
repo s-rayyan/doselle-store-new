@@ -29,15 +29,6 @@ export const TestimonialsSection = () => {
       review: "Well packaged. Made with high quality materials. The silicone case looks and feels amazing. Ample-space-in the-case for extra items! The organizer is spacious and easy to use. Large zipper allows for easy retrieval of items. Great for travelling! Can be used for pills and other small items, such as jewelry, pink and other essential items. Highly recommended!",
       product: "Travel Pill Organizer Box",
       verified: true
-    },
-    {
-      id: 4,
-      name: "Leslie B",
-      location: "December 18, 2024",
-      rating: 5,
-      review: "This is great for travel. There are four separate compartments inside. You can remove the tray to refill. I love the outside, has a small carry handle and is soft to the touch. Easy open and close. Highly recommend!",
-      product: "Travel Pill Organizer Box",
-      verified: true
     }
   ];
 
@@ -60,7 +51,7 @@ export const TestimonialsSection = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
-            <Card key={testimonial.id} className="py-6 hover:shadow-lg transition-all duration-300">
+            <Card key={testimonial.id} className="py-6 hover:scale-105 transition-all duration-300">
               <CardBody>
                 <div className="flex justify-between items-start mb-4">
                   <div>
